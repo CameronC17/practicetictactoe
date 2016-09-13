@@ -11,6 +11,7 @@ var scoreboard = [0,0];
 
 window.onload = function() {
 	var buttons = Array.from(document.getElementsByTagName("button"));
+	var table = document.getElementById("scoreboard");
 
 	buttons.forEach(function(button) {
     button.addEventListener("click", function() {
@@ -66,8 +67,12 @@ window.onload = function() {
 			window.alert("The winner is: " + winner);
 			if (winner == "X")
 				scoreboard[0]++;
-			else if (winner == "Y")
+			else if (winner == "O")
 				scoreboard[1]++;
+
+			//console.log(table.rows[1].cells[0]);
+			table.rows[1].cells[0].innerHTML = scoreboard[0];
+			table.rows[1].cells[1].innerHTML = scoreboard[1];
 		}
 	}
 
