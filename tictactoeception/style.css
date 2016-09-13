@@ -8,6 +8,7 @@ body {
 	height: 500px;
 	float: left;
 	padding-top: 17px;
+	padding-left: 18px;
 	box-sizing: border-box;
 }
 
@@ -25,8 +26,4 @@ body {
 	height: 40px;
 	display: inline-block;
 	float: left;
-}
-
-button#21 {
-	background-color: red;
 }
