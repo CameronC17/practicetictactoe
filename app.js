@@ -74,6 +74,17 @@ window.onload = function() {
 			table.rows[1].cells[0].innerHTML = scoreboard[0];
 			table.rows[1].cells[1].innerHTML = scoreboard[1];
 		}
+
+		//check draw
+		var drawCounter = 0;
+		for (var i = 0; i < tableArray.length; i++) {
+			if (tableArray[i] != null)
+				drawCounter++;
+		}
+
+		if (drawCounter == 9 && winner == null) {
+			window.alert("Nobody has won. HOW?!?!");
+		}
 	}
 
 	function resetBoard() {
