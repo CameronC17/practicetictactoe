@@ -1,0 +1,139 @@
+/*
+	1	2	3
+	4	5	6
+	7	8	9
+*/
+
+
+window.onload = function() {
+  var game = new TTTMulti();
+};
+
+class TTTMulti {
+  constructor() {
+    this.createGameBoard();
+  }
+
+  createGameBoard() {
+  	for (var i = 1; i <= 9; i++) {
+	  	//create the block div
+	  	var div = document.createElement("div");
+	  	//div.className = "block";
+	  	div.setAttribute("class", "block");
+	  	for (var j = 1; j <= 9; j++) {
+	  		var buttonName = i.toString() + j.toString();
+		  	var button = document.createElement("button");
+
+		  	button.addEventListener("click", function(event) {
+		  		window.alert("blabla");
+
+	      	}.bind(this));
+
+		  	//button.id = buttonName;
+		  	button.setAttribute("id", buttonName);
+			div.appendChild(button);
+		}
+		var element = document.getElementById("game");
+		element.appendChild(div);
+	}
+  }
+
+
+
+
+}
+
+
+
+/*var turnCounter = 0;
+var tableArray = [null, null, null, null, null, null, null, null, null];
+var winner = null;
+var scoreboard = [0,0];
+
+window.onload = function() {
+	var buttons = Array.from(document.getElementsByTagName("button"));
+	var table = document.getElementById("scoreboard");
+
+	buttons.forEach(function(button) {
+    button.addEventListener("click", function() {
+    	if (this.id == "clear") {
+    		resetBoard();
+    	} else if (tableArray[this.id-1] == null) {
+    		if (turnCounter % 2 == 0) {
+    			this.textContent = "X";
+    			tableArray[this.id - 1] = "X";
+    			turnCounter++;
+    		} else {
+    			this.textContent = "O";
+    			tableArray[this.id - 1] = "O";
+    			turnCounter++;
+    		}
+
+    		checkWin();
+    	}
+    	});
+	});
+
+	function checkWin() {
+		//check horizontal
+		for (var i = 0; i < 8; i+=3) {
+			if (tableArray[i] == "X" && tableArray[i + 1] == "X" && tableArray[i + 2] == "X") {
+				winner = "X";
+			}
+			else if (tableArray[i] == "O" && tableArray[i + 1] == "O" && tableArray[i + 2] == "O") {
+				winner = "O";
+
+			}
+		}
+		//check vertical
+		for (var i = 0; i < 3; i++) {
+			if (tableArray[i] == "X" && tableArray[i + 3] == "X" && tableArray[i + 6] == "X") {
+				winner = "X";
+			}
+			else if (tableArray[i] == "O" && tableArray[i + 3] == "O" && tableArray[i + 6] == "O") {
+				winner = "O";
+
+			}
+		}
+		//check horizontal
+		if ((tableArray[0] == "X" && tableArray[4] == "X" && tableArray[8] == "X") || (tableArray[2] == "X" && tableArray[4] == "X" && tableArray[6] == "X")) {
+			winner = "X";
+		}
+		if ((tableArray[0] == "O" && tableArray[4] == "O" && tableArray[8] == "O") || (tableArray[2] == "O" && tableArray[4] == "O" && tableArray[6] == "O")) {
+			winner = "O";
+		}
+
+		//amend the scoreboard
+		if (winner != null) {
+			window.alert("The winner is: " + winner);
+			if (winner == "X")
+				scoreboard[0]++;
+			else if (winner == "O")
+				scoreboard[1]++;
+
+			//console.log(table.rows[1].cells[0]);
+			table.rows[1].cells[0].innerHTML = scoreboard[0];
+			table.rows[1].cells[1].innerHTML = scoreboard[1];
+		}
+
+		//check draw
+		var drawCounter = 0;
+		for (var i = 0; i < tableArray.length; i++) {
+			if (tableArray[i] != null)
+				drawCounter++;
+		}
+
+		if (drawCounter == 9 && winner == null) {
+			window.alert("Nobody has won. HOW?!?!");
+		}
+	}
+
+	function resetBoard() {
+		tableArray = [null, null, null, null, null, null, null, null, null];
+		turnCounter = 0;
+		winner = null;
+		for (var i = 0; i < buttons.length - 1; i++) {
+			buttons[i].textContent = "";
+		}
+	}
+}*/
