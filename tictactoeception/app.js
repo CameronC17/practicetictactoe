@@ -43,6 +43,7 @@ class TTTMulti {
 		element.appendChild(div);
 		this.board.push([null, null, null, null, null, null, null, null, null]);
 	}
+
   }
 
   clickedOn(button) {
