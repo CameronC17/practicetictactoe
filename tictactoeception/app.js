@@ -1,8 +1,6 @@
-/*
-	1	2	3
-	4	5	6
-	7	8	9
-*/
+//	1	2	3
+//	4	5	6
+//	7	8	9
 
 
 window.onload = function() {
@@ -48,9 +46,26 @@ class TTTMulti {
 
   clickedOn(button) {
   	this.checkMarker(button);
-  	this.checkWin();
-  	this.updateScoreboard();
+  	this.checkIndividualWin();
   	this.checkGlobalWin();
+  	this.updateScoreboard();
+  }
+
+  checkIndividualWin() {
+  	for (var i = 0; i < 9; i++) {
+  		var hasAnyoneWon = this.newCheckWin(this.board[i]);
+  		if (hasAnyoneWon != null);
+  			this.winner[i] = hasAnyoneWon;
+  	}
+  	console.log(this.winner);
+  }
+
+  checkGlobalWin() {
+  	var anyWinner = this.newCheckWin(this.winner);
+  	if (anyWinner != null) {
+  		this.globalWinner = anyWinner;
+  		window.alert("THE GLOBAL WINNER IS: " + this.globalWinner);
+  	}
   }
 
   checkMarker(button) {
@@ -67,41 +82,6 @@ class TTTMulti {
   	}
   }
 
-  checkWin() {
-  	//for each table
-  	for (var x = 0; x < 9; x++) {
-
-  		//check horizontal
-		for (var i = 0; i < 8; i+=3) {
-			if (this.board[x][i] == "X" && this.board[x][i + 1] == "X" && this.board[x][i + 2] == "X") {
-				this.winner[x] = "X";
-			}
-			else if (this.board[x][i] == "O" && this.board[x][i + 1] == "O" && this.board[x][i + 2] == "O") {
-				this.winner[x] = "O";
-
-			}
-		}
-		//check vertical
-		for (var i = 0; i < 3; i++) {
-			if (this.board[x][i] == "X" && this.board[x][i + 3] == "X" && this.board[x][i + 6] == "X") {
-				this.winner[x] = "X";
-			}
-			else if (this.board[x][i] == "O" && this.board[x][i + 3] == "O" && this.board[x][i + 6] == "O") {
-				this.winner[x] = "O";
-
-			}
-		}
-		//check diagonal
-		if ((this.board[x][0] == "X" && this.board[x][4] == "X" && this.board[x][8] == "X") || (this.board[x][2] == "X" && this.board[x][4] == "X" && this.board[x][6] == "X")) {
-			this.winner[x] = "X";
-		}
-		if ((this.board[x][0] == "O" && this.board[x][4] == "O" && this.board[x][8] == "O") || (this.board[x][2] == "O" && this.board[x][4] == "O" && this.board[x][6] == "O")) {
-			this.winner[x] = "O";
-		}
-  	}
-
-  }
-
   updateScoreboard() {
   	var scoreboard = [0,0];
   	for (var i = 0; i < 9; i++) {
@@ -114,38 +94,38 @@ class TTTMulti {
 	this.table.rows[1].cells[1].innerHTML = scoreboard[1];
   }
 
-  checkGlobalWin() {
+  newCheckWin(whatArray) {
+  	var whoHasWon = null;
+
   	//check horizontal
-		for (var i = 0; i < 8; i+=3) {
-			if (this.winner[i] == "X" && this.winner[i + 1] == "X" && this.winner[i + 2] == "X") {
-				this.globalWinner = "X";
-			}
-			else if (this.winner[i] == "O" && this.winner[i + 1] == "O" && this.winner[i + 2] == "O") {
-				this.globalWinner = "O";
+	for (var i = 0; i < 8; i+=3) {
+		if (whatArray[i] == "X" && whatArray[i + 1] == "X" && whatArray[i + 2] == "X") {
+			whoHasWon = "X";
+		}
+		else if (whatArray[i] == "O" && whatArray[i + 1] == "O" && whatArray[i + 2] == "O") {
+			whoHasWon = "O";
 
-			}
 		}
-		//check vertical
-		for (var i = 0; i < 3; i++) {
-			if (this.winner[i] == "X" && this.winner[i + 3] == "X" && this.winner[i + 6] == "X") {
-				this.globalWinner = "X";
-			}
-			else if (this.winner[i] == "O" && this.winner[i + 3] == "O" && this.winner[i + 6] == "O") {
-				this.globalWinner = "O";
+	}
+	//check vertical
+	for (var i = 0; i < 3; i++) {
+		if (whatArray[i] == "X" && whatArray[i + 3] == "X" && whatArray[i + 6] == "X") {
+			whoHasWon = "X";
+		}
+		else if (whatArray[i] == "O" && whatArray[i + 3] == "O" && whatArray[i + 6] == "O") {
+			whoHasWon = "O";
 
-			}
 		}
-		//check vertical
-		if ((this.winner[0] == "X" && this.winner[4] == "X" && this.winner[8] == "X") || (this.winner[2] == "X" && this.winner[4] == "X" && this.winner[6] == "X")) {
-			this.globalWinner = "X";
-		}
-		if ((this.winner[0] == "O" && this.winner[4] == "O" && this.winner[8] == "O") || (this.winner[2] == "O" && this.winner[4] == "O" && this.winner[6] == "O")) {
-			this.globalWinner = "O";
-		}
+	}
+	//check diagonal
+	if ((whatArray[0] == "X" && whatArray[4] == "X" && whatArray[8] == "X") || (whatArray[2] == "X" && whatArray[4] == "X" && whatArray[6] == "X")) {
+		whoHasWon = "X";
+	}
+	if ((whatArray[0] == "O" && whatArray[4] == "O" && whatArray[8] == "O") || (whatArray[2] == "O" && whatArray[4] == "O" && whatArray[6] == "O")) {
+		whoHasWon = "O";
+	}
 
-		if (this.globalWinner != null) {
-			window.alert("THE GLOBAL WINNER IS: " + this.globalWinner);
-		}
+	return whoHasWon;
   }
 
 }
